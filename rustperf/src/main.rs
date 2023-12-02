@@ -34,7 +34,7 @@ pub fn fn_perf() {
 
     // Get memory usage
     let memory_info = memory::virtual_memory().unwrap();
-    println!("Memory Usage: {} MB / {} MB", memory_info.used() >> 20, memory_info.total() >> 20);
+    println!("Memory Usage: {} B / {} B", memory_info.used() >> 20, memory_info.total() >> 20);
 
 }
 
