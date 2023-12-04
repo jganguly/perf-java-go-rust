@@ -1,6 +1,6 @@
 # Test 1
 
-Set up an of size 1000x1000x1000x10 in stack. Iterate over it and calculate `Pi` using the Leibniz formula.
+Set up an of size 1000x1000x1000 in stack. Iterate to create a product of 1...100 for each of the cells and fill it. 
 
 ## Java21 vs go1.21.3 darwin/amd64 vs rustc 1.74.0 
 
