@@ -9,26 +9,21 @@ public class JavaPerfTest1 {
         elapsedTime();
 
         // Get the OperatingSystemMXBean
-        OperatingSystemMXBean osBean = ManagementFactory.getOperatingSystemMXBean();
+        // OperatingSystemMXBean osBean = ManagementFactory.getOperatingSystemMXBean();
+        // // Print CPU Usage
+        // System.out.println("CPU Usage: " + osBean.getSystemLoadAverage() + "%");
 
-        // Get the MemoryMXBean
-        MemoryMXBean memoryBean = ManagementFactory.getMemoryMXBean();
-
-        // Print CPU Usage
-        System.out.println("CPU Usage: " + getCPUUsage(osBean) + "%");
-
-        // Print Heap Memory Usage
-        MemoryUsage heapMemoryUsage = memoryBean.getHeapMemoryUsage();
-        System.out.println("Heap Memory Usage: " + formatMemoryUsage(heapMemoryUsage));
+        // // Get the MemoryMXBean
+        // MemoryMXBean memoryBean = ManagementFactory.getMemoryMXBean();
+        // // Print Heap Memory Usage
+        // MemoryUsage heapMemoryUsage = memoryBean.getHeapMemoryUsage();
+        // System.out.println("Heap Memory Usage: " + formatMemoryUsage(heapMemoryUsage));
 
         // Print Non-Heap Memory Usage
-        MemoryUsage nonHeapMemoryUsage = memoryBean.getNonHeapMemoryUsage();
-        System.out.println("Non-Heap Memory Usage: " + formatMemoryUsage(nonHeapMemoryUsage));
+        // MemoryUsage nonHeapMemoryUsage = memoryBean.getNonHeapMemoryUsage();
+        // System.out.println("Non-Heap Memory Usage: " + formatMemoryUsage(nonHeapMemoryUsage));
     }
 
-    private static double getCPUUsage(OperatingSystemMXBean osBean) {
-        return osBean.getSystemLoadAverage(); // Returns the recent CPU load average for the system
-    }
 
     private static String formatMemoryUsage(MemoryUsage memoryUsage) {
         long max = memoryUsage.getMax() / (1024 * 1024);
@@ -53,7 +48,8 @@ public class JavaPerfTest1 {
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
 
-        System.out.println("Memory Test Array Size: " + arraySize);
-        System.out.println("Memory Test Time: " + elapsedTime + " milliseconds");
+        System.out.println("Output: Java21");
+        System.out.println("Array Size: " + arraySize);
+        System.out.println("Elapsed Time: " + elapsedTime + " milliseconds");
     }
 }

@@ -2,14 +2,19 @@ package main
 
 import (
 	"fmt"
-	"runtime"
+	// "runtime"
 	"time"
+
+	"github.com/shirou/gopsutil/cpu"
+	"github.com/shirou/gopsutil/mem"	
 )
 
 func main() {
 	elapsedTime()
+	// perfEx()
+}
 
-	// Print CPU Usage
+func perfEx() {
 	cpuUsage, err := getCPUUsage()
 	if err != nil {
 		fmt.Println("Error getting CPU usage:", err)
@@ -17,36 +22,36 @@ func main() {
 		fmt.Printf("CPU Usage: %.2f%%\n", cpuUsage)
 	}
 
-	// Print Memory Usage
-	memoryUsage := getMemoryUsage()
-	fmt.Println("Memory Usage:", formatMemoryUsage(memoryUsage))
+	// Get and print memory usage
+	memoryUsage, err := getMemoryUsage()
+	if err != nil {
+		fmt.Println("Error getting memory usage:", err)
+	} else {
+		fmt.Printf("Memory Usage: Used %v MB, Total %v MB\n", memoryUsage.Used/1024/1024, memoryUsage.Total/1024/1024)
+	}
 }
 
 func getCPUUsage() (float64, error) {
-	// Unfortunately, Go does not have a standard library to directly retrieve CPU usage.
-	// External libraries or system-specific calls may be needed for this purpose.
-	return -1, fmt.Errorf("CPU usage not supported in Go without external libraries")
+	percentages, err := cpu.Percent(time.Second, false)
+	if err != nil {
+		return 0, err
+	}
+	return percentages[0], nil
 }
 
-func getMemoryUsage() runtime.MemStats {
-	var m runtime.MemStats
-	runtime.ReadMemStats(&m)
-	return m
-}
-
-func formatMemoryUsage(memStats runtime.MemStats) string {
-	max := memStats.HeapSys / (1024 * 1024)
-	used := memStats.HeapInuse / (1024 * 1024)
-	committed := memStats.HeapAlloc / (1024 * 1024)
-
-	return fmt.Sprintf("Used: %dMB, Committed: %dMB, Max: %dMB", used, committed, max)
+func getMemoryUsage() (*mem.VirtualMemoryStat, error) {
+	memory, err := mem.VirtualMemory()
+	if err != nil {
+		return nil, err
+	}
+	return memory, nil
 }
 
 func elapsedTime() {
 	startTime := time.Now()
 
 	// Allocate memory
-	arraySize := 1000000
+	arraySize := 1000*1000*1000
 	memoryArray := make([]int, arraySize)
 
     for i:= 1; i < arraySize; i++ {
@@ -54,8 +59,8 @@ func elapsedTime() {
     }
 
 
-	elapsedTime := time.Since(startTime)
+	elapsedTime := time.Since(startTime).Milliseconds()
 
-	fmt.Println("Memory Test Array Size:", arraySize)
-	fmt.Println("Memory Test Time:", elapsedTime)
+	fmt.Println("Array Size:", arraySize)
+	fmt.Println("Elapsed Time:", elapsedTime)
 }

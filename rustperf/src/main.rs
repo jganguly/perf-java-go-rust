@@ -5,26 +5,25 @@ use psutil::memory;
 
 fn main() {
     elapsed_time();
-    fn_perf();
+    // fn_perf();
 
 }
-
 
 fn elapsed_time() {
     let start_time = Instant::now();
 
     // Allocate memory
-    let array_size = 1_000_000;
+    let array_size = 1_000_000_000;
     let mut memory_array = Vec::with_capacity(array_size);
 
     for i in 1..array_size {
         memory_array.push(i);
     }
 
-    let elapsed_time = Instant::now() - start_time;
+    let elapsed_time = (Instant::now() - start_time)*1000;
 
-    println!("Memory Test Array Size: {}", array_size);
-    println!("Memory Test Time: {:?}", elapsed_time);
+    println!("Array Size: {}", array_size);
+    println!("Elapsed Time: {:?}", elapsed_time);
 }
 
 pub fn fn_perf() {
