@@ -11,8 +11,8 @@ cd rustperf ; cargo build --release ; ./target/release/rustperf ; cd ..
 ```
 
 ```bash
-Elapsed Time: 7051 milliseconds
-Elapsed Times: 7330 milliseconds
-Elapsed Time: 6692 milliseconds
+Elapsed Time: 46210 milliseconds
+Elapsed Time: 58482 milliseconds
+Elapsed Time: 3740 milliseconds
 ```
 
