@@ -1,39 +1,41 @@
 use std::time::{Instant};
-use psutil::cpu;
-use psutil::memory;
+// use psutil::cpu;
+// use psutil::memory;
 
 
 fn main() {
-    elapsed_time();
-    // fn_perf();
-
+    let start_time = Instant::now();
+    run_your_code();
+    let elapsed_time = Instant::now() - start_time;
+    println!("Elapsed Time: {:?} milliseconds", elapsed_time.as_millis());
 }
 
-fn elapsed_time() {
-    let start_time = Instant::now();
+fn run_your_code() {
+    // Allocate a large vector to consume memory
+    let n = 1000 * 1000 * 1000;
+    println!("Array Size: {}", n);
+    let mut large_vector = Vec::with_capacity(n);
 
-    // Allocate memory
-    let array_size = 1_000_000_000;
-    let mut memory_array = Vec::with_capacity(array_size);
-
-    for i in 1..array_size {
-        memory_array.push(i);
+    for i in 0..n {
+        large_vector.push(i);
     }
 
-    let elapsed_time = (Instant::now() - start_time)*1000;
-
-    println!("Array Size: {}", array_size);
-    println!("Elapsed Time: {:?}", elapsed_time);
+    // CPU-intensive operation - calculating Pi using the Leibniz formula
+    let mut pi : f64 = 0.0;
+    for i in 0..n {
+        pi += if i % 2 == 0 { 1.0 } else { -1.0 } * 4.0 / (2 * i + 1) as f64;
+    }
 }
 
-pub fn fn_perf() {
-    // Get CPU usage
-    let cpu_percent = cpu::cpu_count();
-    println!("CPU Usage: {}%", cpu_percent);
 
-    // Get memory usage
-    let memory_info = memory::virtual_memory().unwrap();
-    println!("Memory Usage: {} B / {} B", memory_info.used() >> 20, memory_info.total() >> 20);
+// pub fn fn_perf() {
+//     // Get CPU usage
+//     let cpu_percent = cpu::cpu_count();
+//     println!("CPU Usage: {}%", cpu_percent);
 
-}
+//     // Get memory usage
+//     let memory_info = memory::virtual_memory().unwrap();
+//     println!("Memory Usage: {} B / {} B", memory_info.used() >> 20, memory_info.total() >> 20);
+
+// }
 

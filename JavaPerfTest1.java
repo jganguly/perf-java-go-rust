@@ -33,23 +33,32 @@ public class JavaPerfTest1 {
         return "Used: " + used + "MB, Committed: " + committed + "MB, Max: " + max + "MB";
     }
 
+    private static void runYourCode() {
+        // Allocate a large array to consume memory
+        int n = 1000*1000*1000;
+        System.out.println("Array Size: " + n);
+        int[] largeArray = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            largeArray[i] = i;
+        }
+
+       // CPU-intensive operation - calculating Pi using the Leibniz formula
+        int iterations = n;
+        double pi = 0.0;
+
+        for (int i = 0; i < iterations; i++) {
+            pi += (i % 2 == 0 ? 1 : -1) * 4.0 / (2 * i + 1);
+        }
+    }
 
     private static void elapsedTime() {
         long startTime = System.currentTimeMillis();
-
-        // Allocate memory
-        int arraySize = 1000*1000*1000;
-        int[] memoryArray = new int[arraySize];
-
-        for (int i=0; i<arraySize; i++) {
-            memoryArray[i] = i;
-        }
-
+        System.out.println("Output: Java21");
+        runYourCode();
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
 
-        System.out.println("Output: Java21");
-        System.out.println("Array Size: " + arraySize);
         System.out.println("Elapsed Time: " + elapsedTime + " milliseconds");
     }
 }

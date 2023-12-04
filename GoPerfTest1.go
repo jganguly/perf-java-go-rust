@@ -10,9 +10,30 @@ import (
 )
 
 func main() {
-	elapsedTime()
-	// perfEx()
+	startTime := time.Now()
+	runYourCode()
+	elapsedTime := time.Since(startTime).Milliseconds()
+
+	msg := fmt.Sprintf("Elapsed Times: %d milliseconds", elapsedTime)
+	fmt.Println(msg)
 }
+
+func runYourCode() {
+	// Allocate a large array to consume memory
+	n := 1000 * 1000 * 1000
+	fmt.Println("Array Size:", n)
+	largeArray := make([]int, n)
+	for i := 0; i < n; i++ {
+		largeArray[i] = i
+	}
+	// CPU-intensive operation - calculating Pi using the Leibniz formula
+	pi := 0.0
+
+	for i := 0; i < n; i++ {
+		pi += float64((i % 2 * 2 - 1)) * 4.0 / float64(2*i+1)
+	}
+}
+
 
 func perfEx() {
 	cpuUsage, err := getCPUUsage()
@@ -47,20 +68,4 @@ func getMemoryUsage() (*mem.VirtualMemoryStat, error) {
 	return memory, nil
 }
 
-func elapsedTime() {
-	startTime := time.Now()
 
-	// Allocate memory
-	arraySize := 1000*1000*1000
-	memoryArray := make([]int, arraySize)
-
-    for i:= 1; i < arraySize; i++ {
-    	memoryArray[i] = i;
-    }
-
-
-	elapsedTime := time.Since(startTime).Milliseconds()
-
-	fmt.Println("Array Size:", arraySize)
-	fmt.Println("Elapsed Time:", elapsedTime)
-}
