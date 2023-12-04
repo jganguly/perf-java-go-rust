@@ -13,18 +13,19 @@ fn main() {
 fn run_your_code() {
     // Allocate a large vector to consume memory
     let n = 1000 * 1000 * 1000;
-    println!("Array Size: {}", n);
     let mut large_vector = Vec::with_capacity(n);
 
-    for i in 0..n {
-        large_vector.push(i);
+    for _i in 0..n {
+        large_vector.push(calculate_product());
     }
+}
 
-    // CPU-intensive operation - calculating Pi using the Leibniz formula
-    let mut pi : f64 = 0.0;
-    for i in 0..n {
-        pi += if i % 2 == 0 { 1.0 } else { -1.0 } * 4.0 / (2 * i + 1) as f64;
+fn calculate_product() -> usize {
+    let mut product = 1;
+    for i in 1..=100 {
+        product *= i;
     }
+    product
 }
 
 

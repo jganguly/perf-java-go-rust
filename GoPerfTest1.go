@@ -14,24 +14,26 @@ func main() {
 	runYourCode()
 	elapsedTime := time.Since(startTime).Milliseconds()
 
-	msg := fmt.Sprintf("Elapsed Times: %d milliseconds", elapsedTime)
+	msg := fmt.Sprintf("Elapsed Time: %d milliseconds", elapsedTime)
 	fmt.Println(msg)
 }
 
 func runYourCode() {
-	// Allocate a large array to consume memory
+	// Allocate a large slice to consume memory
 	n := 1000 * 1000 * 1000
-	fmt.Println("Array Size:", n)
-	largeArray := make([]int, n)
-	for i := 0; i < n; i++ {
-		largeArray[i] = i
-	}
-	// CPU-intensive operation - calculating Pi using the Leibniz formula
-	pi := 0.0
+	largeSlice := make([]int, n)
 
 	for i := 0; i < n; i++ {
-		pi += float64((i % 2 * 2 - 1)) * 4.0 / float64(2*i+1)
+		largeSlice[i] = calculateProduct()
 	}
+}
+
+func calculateProduct() int {
+	product := 1
+	for i := 1; i <= 100; i++ {
+		product *= i
+	}
+	return product
 }
 
 

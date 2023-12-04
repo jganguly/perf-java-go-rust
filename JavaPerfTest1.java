@@ -3,6 +3,7 @@ import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
 import java.lang.management.OperatingSystemMXBean;
 
+
 public class JavaPerfTest1 {
 
     public static void main(String[] args) {
@@ -36,25 +37,24 @@ public class JavaPerfTest1 {
     private static void runYourCode() {
         // Allocate a large array to consume memory
         int n = 1000*1000*1000;
-        System.out.println("Array Size: " + n);
         int[] largeArray = new int[n];
 
         for (int i = 0; i < n; i++) {
-            largeArray[i] = i;
+            largeArray[i] = calculateProduct();        
         }
+    }
 
-       // CPU-intensive operation - calculating Pi using the Leibniz formula
-        int iterations = n;
-        double pi = 0.0;
 
-        for (int i = 0; i < iterations; i++) {
-            pi += (i % 2 == 0 ? 1 : -1) * 4.0 / (2 * i + 1);
+    private static int calculateProduct() {
+        int product = 1;
+        for (int i = 1; i <= 100*1; i++) {
+            product *= i;
         }
+        return product;
     }
 
     private static void elapsedTime() {
         long startTime = System.currentTimeMillis();
-        System.out.println("Output: Java21");
         runYourCode();
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
