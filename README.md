@@ -16,3 +16,25 @@ Elapsed Time: 58482 milliseconds
 Elapsed Time: 3740 milliseconds
 ```
 
+```bash
+Java
+CPU Usage: 2.73486328125%
+Memory Pool: CodeHeap 'non-nmethods'
+  Committed Memory: 2 MB
+  Used Memory: 1 MB
+  Max Memory: 7 MB
+  Usage Threshold: 0 MB
+
+Go
+CPU Usage: 6.20%
+Heap Memory Usage:
+  Alloc: 7629 MB
+  TotalAlloc: 7629 MB
+  Sys: 7769 MB
+  NumGC: 1
+  
+Rust
+CPU Usage: 16%
+31744 bytes allocated/4804608 bytes resident
+```
+
